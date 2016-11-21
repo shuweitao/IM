@@ -15,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.swt.im.R;
+import com.swt.im.model.Model;
 import com.swt.im.utils.SharedPreferencesUtils;
 
 
@@ -30,33 +33,25 @@ public class LoginActivity extends Activity implements OnClickListener {
     private ImageView iv_clean1;//清除用户名
     private ImageView iv_clean2;//清除密码
     private SharedPreferencesUtils sp;
-    private int openNew = -1;
+    private TextView tv_zc;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        if (bundle != null) {
-            if (bundle.containsKey("openNew")) {
-                openNew = bundle.getInt("openNew");
-                Log.i("sean2", "LoginActivity++++++:" + openNew);
-            }
-        }
         sp = SharedPreferencesUtils.getInstance(this);
 
-        setupView();
+        initView();
     }
 
     /**
      * 初始化控件
      */
-    private void setupView() {
-        TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(this);
+    private void initView() {
 
+        tv_zc = (TextView) findViewById(R.id.tv_zc);
+        tv_zc.setOnClickListener(this);
         etName = (EditText) findViewById(R.id.etName);
         etPwd = (EditText) findViewById(R.id.etPwd);
         etName.setText(sp.getUserName());
@@ -127,10 +122,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View arg0) {
+        final String name = etName.getText().toString().trim();
+        final String pwd = etPwd.getText().toString().trim();
         switch (arg0.getId()) {
             case R.id.btnLogin:
-                String name = etName.getText().toString().trim();
-                String pwd = etPwd.getText().toString().trim();
                 if (name.length() == 0) {
                     Toast.makeText(LoginActivity.this, "用户名不能为空", Toast.LENGTH_SHORT).show();
                     return;
@@ -148,7 +143,41 @@ public class LoginActivity extends Activity implements OnClickListener {
             case R.id.iv_clean2:
                 etPwd.setText("");
                 break;
+            case R.id.tv_zc:
+                if (name.length() == 0) {
+                    Toast.makeText(LoginActivity.this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (pwd.length() == 0) {
+                    Toast.makeText(LoginActivity.this, "密码不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                //去环信服务器注册账号
+                Model.getInstance().getGlobalThreadPool().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            EMClient.getInstance().createAccount(name, pwd);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } catch (final HyphenateException e) {
+                            e.printStackTrace();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    Toast.makeText(LoginActivity.this, "注册失败" + e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
+                break;
             default:
                 break;
         }
