@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="black">#FF333333</color>
+    <color name="white">#FFffffff</color>
+    <color name="red">#FFe40026</color>
+    <color name="blue">#FF0096ff</color>
+
+    <drawable name="dr_489fdc">#FF489fdc</drawable>
+    <drawable name="dr_c1e1f8">#FFc1e1f8</drawable>
+    <drawable name="dr_e3e3e3">#FFe3e3e3</drawable>
+    <drawable name="dr_f4f9fd">#FFf4f9fd</drawable>
+
+    <color name="calendar_active_month_bg">#fff5f7f9</color>
+    <color name="calendar_inactive_month_bg">#ffd7d9db</color>
+    <color name="calendar_text_inactive">#40778088</color>
+    <color name="m_a">#778399</color>
+    <color name="a">#ffffff</color>
+    <color name="b">#e7e7e7</color>
+    <color name="c">#dddddd</color>
+    <color name="e">#bbbbbb</color>
+    <color name="i">#333333</color>
+    <color name="j">#000000</color>
+    <color name="l">#02a964</color>
+    <color name="r">#ff7b7c</color>
+    <color name="s">#e81919</color>
+    <color name="x">#017d46</color>
+    <color name="z">#999999</color>
+    <color name="g">#aaaaaa</color>
+    <color name="fa">#fafafa</color>
+    <color name="bc">#bcbcbc</color>
+    <color name="ee">#eeeeee</color>
+    <color name="da">#dadada</color>
+    <color name="cb">#666666</color>
+
+    <color name="green">#3cb80a</color>
+    <color name="grey">#989898</color>
+    <color name="line">#e1e1e1</color>
+    <color name="head">#f0f3f8</color>
+    <color name="bg">#f0f3f8</color>
+
+
+    <!-- zxing -->
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
+    <!--swt-->
+    <color name="blue_btn">#25aff8</color>
+    <color name="bluedark">#18589b</color>
+    <color name="province_line_border">#D0D0D0</color>
+    <color name="f4">#f4f4f4</color>
+    <color name="cb82">#828282</color>
+    <color name="cb89">#999999</color>
+    <color name="cr11">#fa3e58</color>
+    <color name="crj1">#18589b</color>
+    <color name="crj2">#25aff8</color>
+    <color name="crj4">#e9f7fe</color>
+</resources>
